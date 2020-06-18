@@ -12,8 +12,6 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <iostream>
 #include <stdio.h>
-//using namespace cv;
-//using namespace std;
 
 void thresh_callback(int, void*)
 {
@@ -30,7 +28,7 @@ int main(int, char**)
     std::vector<std::vector<cv::Point> > contours;
     std::vector<cv::Vec4i> hierarchy;
 
-    //--- INITIALIZE VIDEOCAPTURE
+    // Init video capture`
     cv::VideoCapture cap;
     // open the default camera using default API
     cap.open(0);
@@ -42,7 +40,7 @@ int main(int, char**)
     cv::namedWindow( source_window, CV_WINDOW_AUTOSIZE);
     cv::createTrackbar( " Canny thresh:",source_window, &thresh, max_thresh, thresh_callback );
 
-    //--- GRAB AND WRITE LOOP
+    // Grab frame loop
     std::cout << "Start grabbing" << std::endl
         << "Press any key to terminate" << std::endl;
     for (;;)
@@ -58,8 +56,9 @@ int main(int, char**)
         cv::cvtColor(frame, frame, cv::COLOR_BGR2GRAY);
         cv::blur( frame, frame, cv::Size(3,3) );
 
+        // Canny edge detector
         cv::Canny( frame, canny_output, thresh, thresh*2, 3 );
-        /// Find contours
+        /// Find contours of edges to apply coloring
         cv::findContours( canny_output, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, cv::Point(0, 0) );
 
 

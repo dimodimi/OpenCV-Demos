@@ -6,9 +6,6 @@ include_directories( ${OpenCV_INCLUDE_DIRS} )
 add_executable( camera_test src/camera_test.cpp )
 target_link_libraries( camera_test ${OpenCV_LIBS} )
 
-add_executable( canny_detector src/canny_test.cpp )
-target_link_libraries( canny_detector ${OpenCV_LIBS} )
-
 add_executable( harris_detector src/harris.cpp )
 target_link_libraries( harris_detector ${OpenCV_LIBS} )
 
