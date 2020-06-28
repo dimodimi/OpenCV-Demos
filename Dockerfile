@@ -20,11 +20,18 @@ RUN apt-get update \
         libavformat-dev \
         libpq-dev \
         libgtk2.0-dev \
+	tesseract-ocr \
+        libtesseract-dev \
+        tesseract-ocr-eng \
+        tesseract-ocr-script-latn \
+        tesseract-ocr-ell \
+        tesseract-ocr-script-grek \
     && rm -rf /var/lib/apt/lists/*
 
 RUN pip3 install numpy
 
 WORKDIR /
+ADD https://www.dropbox.com/s/g8pjzv2de9gty8g/TextBoxes_icdar13.caffemodel?dl=1 .
 RUN git clone https://github.com/opencv/opencv_contrib.git
 RUN git clone https://github.com/opencv/opencv.git \
 && mkdir opencv/build \
@@ -49,5 +56,3 @@ RUN git clone https://github.com/opencv/opencv.git \
   -DPYTHON_PACKAGES_PATH=$(python3.6 -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())") \
   .. \
 && make -j4 install
-
-RUN rm -r opencv/ opencv_contrib/

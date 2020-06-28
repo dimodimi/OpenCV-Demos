@@ -1,1 +1,1 @@
-dimodimi/opencv:4.3.0_contrib
+dimodimi/opencv:4.3.0-contrib
